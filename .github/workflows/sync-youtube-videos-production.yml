@@ -6,8 +6,13 @@ on:
     - cron: "0 15 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   sync-videos:
+    if: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_SERVICE_ROLE_KEY != '' && secrets.YOUTUBE_API_KEY != '' && secrets.GOOGLE_CLIENT_ID != '' && secrets.GOOGLE_CLIENT_SECRET != '' && secrets.APP_URL != '' && secrets.BATCH_ADMIN_KEY != '' }}
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}

@@ -6,8 +6,13 @@ on:
     - cron: '5 15 * * *'
   workflow_dispatch: # 手動実行も可能
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   calculate-badges:
+    if: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_SERVICE_ROLE_KEY != '' }}
     runs-on: ubuntu-latest
     
     steps:
