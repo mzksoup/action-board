@@ -6,8 +6,13 @@ on:
     - cron: "30 15 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   sync-tiktok-videos:
+    if: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_SERVICE_ROLE_KEY != '' && secrets.TIKTOK_CLIENT_KEY != '' && secrets.TIKTOK_CLIENT_SECRET != '' }}
     runs-on: ubuntu-latest
 
     steps:

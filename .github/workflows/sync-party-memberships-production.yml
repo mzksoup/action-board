@@ -6,8 +6,13 @@ on:
     - cron: "30 15 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   sync-party-memberships:
+    if: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_SERVICE_ROLE_KEY != '' && secrets.GOOGLE_SERVICE_ACCOUNT_JSON != '' && secrets.GOOGLE_PARTY_MEMBER_SPREADSHEET_ID != '' }}
     runs-on: ubuntu-latest
 
     steps:
